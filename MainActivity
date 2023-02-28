@@ -1,0 +1,78 @@
+package com.example.theraapp_okojie;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public CardView acctcard;     //user profile/account info object
+    public CardView btnMood;   //Mood tracker
+    public CardView btnMed;   //Mood tracker
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        //objects
+        acctcard = (CardView) findViewById(R.id.accountcard);
+        btnMood = (CardView) findViewById(R.id.moodcard);
+        btnMed= (CardView) findViewById(R.id.medcard);
+        //assign on click to object
+        acctcard.setOnClickListener(this);
+        btnMood.setOnClickListener(this);
+        btnMed.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        Intent i;
+
+        switch (view.getId()){
+            case R.id.accountcard:
+                i = new Intent(this,UserProfile.class);
+                startActivity(i);
+                break;
+
+                //add your case below
+            case R.id.moodcard:
+                i = new Intent(this, RateMood.class);
+                startActivity(i);
+                break;
+
+            case R.id.medcard:
+                i = new Intent(this, Meditation.class);
+                startActivity(i);
+                break;
+
+        }
+
+    }
+
+    //back button function
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+}
